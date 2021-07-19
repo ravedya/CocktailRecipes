@@ -22,4 +22,9 @@
         android:name="com.ravedya.cocktailrecipes.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.ravedya.cocktailrecipes.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>
