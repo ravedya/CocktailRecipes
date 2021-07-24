@@ -9,13 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.ravedya.cocktailrecipes.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.ravedya.cocktailrecipes.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
@@ -23,8 +21,22 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.ravedya.cocktailrecipes.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        android:id="@+id/navigation_detail"
+        android:name="com.ravedya.cocktailrecipes.ui.detail.DetailFragment"
+        android:label="@string/title_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="idDrink"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_explore"
+        android:name="com.ravedya.cocktailrecipes.ui.explore.ExploreFragment"
+        android:label="fragment_explore"
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_navigation_explore_to_navigation_detail"
+            app:destination="@id/navigation_detail" />
+    </fragment>
 </navigation>

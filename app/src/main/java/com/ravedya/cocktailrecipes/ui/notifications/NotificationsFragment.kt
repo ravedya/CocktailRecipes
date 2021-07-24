@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.ravedya.cocktailrecipes.R
 import com.ravedya.cocktailrecipes.databinding.FragmentNotificationsBinding
 
 class NotificationsFragment : Fragment() {

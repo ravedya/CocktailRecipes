@@ -1,9 +1,20 @@
 <resources>
     <string name="app_name">Cocktail Recipes</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_detail">Detail</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="explore">Explore Drinks</string>
+
+    <string name="drink_name">Margarita</string>
+    <string name="drink_category">Cocktail</string>
+    <string name="glass_type">Cocktail Glass</string>
+    <string name="instruction">Instruction</string>
+    <string name="instruction_content">Rub the rim of the glass with the lime slice to make the salt
+        stick to it. Take care to moisten only the outer rim and sprinkle the salt on it. The salt
+        should present to the lips of the imbiber and never mix into the cocktail.
+        Shake the other ingredients with ice, then carefully pour into the glass.</string>
+    <string name="ingredients_title">Ingredients</string>
 </resources>

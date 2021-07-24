@@ -9,6 +9,9 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
+    implementation "com.makeramen:roundedimageview:2.3.0"
+    implementation "com.flaviofaria:kenburnsview:1.0.7"
+    implementation "com.facebook.shimmer:shimmer:0.5.0"
 
     //LifeCycle
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
@@ -19,9 +22,14 @@ dependencies {
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
     kaptAndroidTest "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
+
+    // retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
 
     //Test Basic
     testImplementation "junit:junit:$junit_version"
