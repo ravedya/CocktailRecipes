@@ -9,9 +9,9 @@ import com.ravedya.core.domain.model.CocktailModel
 
 class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>() {
 
-    private val listData = ArrayList<CocktailModel>()
+    private val listData = ArrayList<CocktailModel?>()
 
-    fun setData(newList: List<CocktailModel>?) {
+    fun setData(newList: List<CocktailModel?>?) {
         if (newList == null) return
         listData.clear()
         listData.addAll(newList)
@@ -20,11 +20,11 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>
 
     inner class CocktailViewHolder(private val binding: ItemCardListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: CocktailModel) {
+        fun bind(data: CocktailModel?) {
             with(binding) {
-                Helper.setImageWithGlide(itemView.context, data.drinkThumbnail, imgDrinkThumb)
-                tvDrinkCategory.text = data.category
-                tvDrinkName.text = data.drinkName
+                Helper.setImageWithGlide(itemView.context, data?.drinkThumbnail, imgDrinkThumb)
+                tvDrinkCategory.text = data?.category ?: ""
+                tvDrinkName.text = data?.drinkName ?: ""
 
                 itemView.setOnClickListener { onItemClickCallback?.onItemClicked(data) }
             }
@@ -50,7 +50,7 @@ class CocktailAdapter : RecyclerView.Adapter<CocktailAdapter.CocktailViewHolder>
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(data: CocktailModel)
+        fun onItemClicked(data: CocktailModel?)
     }
 
 

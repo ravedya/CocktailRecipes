@@ -72,16 +72,20 @@ class ExploreFragment : Fragment() {
         })
 
         adapter.setOnItemClickCallback(object : CocktailAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: CocktailModel) {
-                val id = data.drinkId
-                val action = ExploreFragmentDirections.actionNavigationExploreToNavigationDetail(
-                    id
-                )
-                lifecycleScope.launch {
-                    exploreViewModel.insertCocktail(data)
+            override fun onItemClicked(data: CocktailModel?) {
+                if (data != null) {
+                    val id = data.drinkId
+                    val action =
+                        ExploreFragmentDirections.actionNavigationExploreToNavigationDetail(
+                            id
+                        )
+                    lifecycleScope.launch {
+                        exploreViewModel.insertCocktail(data)
+                    }
+                    findNavController().navigate(action)
                 }
-                findNavController().navigate(action)
             }
+
         })
 
         recyclerViewSetup()

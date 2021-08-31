@@ -3,7 +3,7 @@ package com.ravedya.core.data.remote.entity
 import com.google.gson.annotations.SerializedName
 
 data class Drink(
-    val idDrink: Int,
+    val idDrink: Int=0,
     @SerializedName("strAlcoholic")
     val alcoholic: String?,
     @SerializedName("strCategory")

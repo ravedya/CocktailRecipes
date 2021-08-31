@@ -1,8 +1,10 @@
 package com.ravedya.core.domain.repository
 
+import android.util.Log
 import com.ravedya.core.data.NetworkResourceBound
 import com.ravedya.core.data.Resource
 import com.ravedya.core.data.local.LocalDataSource
+import com.ravedya.core.data.local.entity.CocktailEntity
 import com.ravedya.core.data.remote.RemoteDataSource
 import com.ravedya.core.data.remote.entity.Drink
 import com.ravedya.core.data.remote.network.ApiResponse
@@ -29,14 +31,14 @@ constructor(
     private val databaseMapper: DatabaseMapper
 ) : Repository {
     override fun getCocktails(): Flow<Resource<List<CocktailModel>>> {
-        return object : NetworkResourceBound<List<CocktailModel>, List<Drink>>() {
+        return object : NetworkResourceBound<List<CocktailModel?>, List<Drink>>() {
             override fun loadFromDB(): Flow<List<CocktailModel>> {
                 return localDataSource.getListCocktails().map {
                     databaseMapper.fromEntityList(it)
                 }
             }
 
-            override fun shouldFetch(data: List<CocktailModel>?): Boolean {
+            override fun shouldFetch(data: List<CocktailModel?>?): Boolean {
                 return data?.isEmpty() == true || data == null
             }
 
@@ -63,12 +65,14 @@ constructor(
         return object : NetworkResourceBound<CocktailModel, Drink>() {
             override fun loadFromDB(): Flow<CocktailModel?>? {
                 return localDataSource.getCocktailById(id)?.map {
-                    return@map databaseMapper.mapFromEntity(it)
+                    if(it == null){
+                        return@map null
+                    }else return@map databaseMapper.mapFromEntity(it)
                 }
             }
 
             override fun shouldFetch(data: CocktailModel?): Boolean {
-                return data?.drinkName == null || data == null
+                return data != null && data.drinkName == null
             }
 
             override suspend fun createCall(): Flow<ApiResponse<Drink>> {
@@ -95,8 +99,10 @@ constructor(
     override suspend fun searchCocktail(query: String): Resource<List<CocktailModel>> {
         return when (val response = remoteDataSource.searchDrink(query).first()) {
             is ApiResponse.Success -> {
-                val cocktailEntity = networkMapper.toEntityList(response?.data)
+                val cocktailEntity = networkMapper.toEntityList(response.data)
+                Log.d("Cocktail Entity", cocktailEntity.toString())
                 val cocktail = databaseMapper.fromEntityList(cocktailEntity)
+                Log.d("Cocktail", cocktail.toString())
                 Resource.Success(cocktail)
             }
             is ApiResponse.Error -> {
@@ -111,7 +117,7 @@ constructor(
     override suspend fun insertCocktail(cocktailModel: CocktailModel) {
         val cocktailEntity = databaseMapper.mapToEntity(cocktailModel)
         CoroutineScope(Dispatchers.IO).launch {
-            localDataSource.updateCocktail(cocktailEntity)
+            localDataSource.insertCocktail(cocktailEntity)
         }
     }
 }

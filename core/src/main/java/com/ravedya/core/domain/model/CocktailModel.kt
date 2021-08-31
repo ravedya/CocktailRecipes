@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CocktailModel(
 
-    val drinkId: Int,
+    val drinkId: Int=0,
 
     val drinkName: String?,
 

@@ -5,9 +5,9 @@ import com.ravedya.core.data.remote.entity.Drink
 import com.ravedya.core.utils.Mapper
 
 class NetworkMapper:Mapper<CocktailEntity,Drink> {
-    override fun mapFromEntity(entity: CocktailEntity): Drink {
+    override fun mapFromEntity(entity: CocktailEntity?): Drink {
         return Drink(
-            idDrink = entity.drinkId,
+            idDrink = entity!!.drinkId,
             nameDrink = entity.drinkName,
             drinkThumb = entity.drinkThumbnail,
             drinkImage = entity.drinkImage,
@@ -48,9 +48,9 @@ class NetworkMapper:Mapper<CocktailEntity,Drink> {
         )
     }
 
-    override fun mapToEntity(domainModel: Drink): CocktailEntity {
+    override fun mapToEntity(domainModel: Drink?): CocktailEntity {
         return CocktailEntity(
-            drinkId = domainModel.idDrink,
+            drinkId = domainModel!!.idDrink,
             drinkName = domainModel.nameDrink,
             drinkThumbnail = domainModel.drinkThumb,
             drinkImage = domainModel.drinkImage,

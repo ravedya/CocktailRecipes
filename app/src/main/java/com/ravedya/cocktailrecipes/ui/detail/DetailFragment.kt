@@ -26,7 +26,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,10 +43,12 @@ class DetailFragment : Fragment() {
                 when (it) {
                     is Resource.Loading -> showLoading(true)
                     is Resource.Success -> {
-                        showLoading(false)
-                        val data = it?.data as CocktailModel
-                        Log.d("DATA", data.toString())
-                        setDataCocktail(data)
+                        if (it != null) {
+                            showLoading(false)
+                            val data = it.data as CocktailModel
+                            Log.d("DATA", data.toString())
+                            setDataCocktail(data)
+                        }
                     }
                     is Resource.Error -> {
                         showLoading(false)
@@ -87,9 +89,9 @@ class DetailFragment : Fragment() {
             tvMsr10.text = data.measure10
 
 
-            if(data.drinkImage == null){
-            Helper.setImageWithGlide(requireContext(), data.drinkThumbnail, imgTopBar)
-            }else Helper.setImageWithGlide(requireContext(), data.drinkImage, imgTopBar)
+            if (data.drinkImage == null) {
+                Helper.setImageWithGlide(requireContext(), data.drinkThumbnail, imgTopBar)
+            } else Helper.setImageWithGlide(requireContext(), data.drinkImage, imgTopBar)
 
             setFavButton(data.isFavorite)
 

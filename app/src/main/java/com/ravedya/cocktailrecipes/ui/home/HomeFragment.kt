@@ -57,12 +57,14 @@ class HomeFragment : Fragment() {
         })
 
         adapter.setOnItemClickCallback(object : CocktailAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: CocktailModel) {
-                val id = data.drinkId
-                val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(
-                    id
-                )
-                findNavController().navigate(action)
+            override fun onItemClicked(data: CocktailModel?) {
+                if (data != null) {
+                    val id = data.drinkId
+                    val action = HomeFragmentDirections.actionNavigationHomeToNavigationDetail(
+                        id
+                    )
+                    findNavController().navigate(action)
+                }
             }
         })
 
